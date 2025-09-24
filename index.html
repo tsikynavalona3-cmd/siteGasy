@@ -6,57 +6,71 @@
   <title>Site EN MAINTENANCE</title>
   <style>
     body {
-      background-color: #1e1e1e;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+      text-align: center;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      background: linear-gradient(-45deg, #1e1e1e, #2c2c2c, #ff9800, #ff5722);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .container {
       width: 90%;
       max-width: 800px;
       padding: 20px;
       border: 2px dashed #ff9800;
       border-radius: 10px;
-      background-color: #2c2c2c;
+      background-color: rgba(0, 0, 0, 0.6);
       animation: slideInOut 3s ease-in-out infinite;
     }
+
     @keyframes slideInOut {
       0% { transform: translateX(-10px); }
       50% { transform: translateX(10px); }
       100% { transform: translateX(-10px); }
     }
+
     h1 {
       font-size: 8vw;
       text-transform: uppercase;
       margin: 0;
       color: #ff9800;
-      position: relative;
       animation: flame 1s infinite alternate;
     }
+
     @keyframes flame {
       0% { text-shadow: 0 0 10px #ff5722, 0 0 20px #ff9800; }
       100% { text-shadow: 0 0 20px #ff5722, 0 0 30px #ff9800; }
     }
+
     p, .alert, .countdown {
       font-size: 4vw;
       margin-top: 20px;
       animation: fadeInOut 2s ease-in-out infinite;
     }
+
     .alert {
       font-weight: bold;
       color: #ff4c4c;
     }
+
     @keyframes fadeInOut {
       0%, 100% { opacity: 0.6; }
       50% { opacity: 1; }
     }
+
     .contact-btn {
       margin-top: 30px;
       padding: 12px 24px;
@@ -68,16 +82,30 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     .contact-btn:hover {
       background-color: #ffa726;
     }
+
+    .qr-code {
+      margin-top: 20px;
+    }
+
+    .qr-code img {
+      width: 150px;
+      height: 150px;
+      border: 4px solid #ff9800;
+      border-radius: 10px;
+    }
+
     @media (max-width: 480px) {
       h1 { font-size: 10vw; }
       p, .alert, .countdown { font-size: 5vw; }
+      .qr-code img { width: 120px; height: 120px; }
     }
   </style>
   <script>
-    let seconds = 15;
+    let seconds = 60;
     function updateCountdown() {
       const countdown = document.getElementById("countdown");
       countdown.textContent = "Redirection dans " + seconds + " secondes...";
@@ -91,11 +119,14 @@
 </head>
 <body onload="updateCountdown()">
   <div class="container">
-    <h1>⛔ SITE EN MAINTENANCE</h1>
+    <h1>🚫MAINTENANCE🚫</h1>
     <p>Nous sommes actuellement en cours de mise à jour.<br>Veuillez revenir dans quelques instants.</p>
-    <div class="alert">⚠️ Le dépôt rencontre encore des problèmes techniques.</div>
-    <div class="countdown" id="countdown">Redirection dans 15 secondes...</div>
+    <div class="alert">🆘Le dépôt rencontre encore des problèmes techniques.🆘</div>
+    <div class="countdown" id="countdown">Redirection dans 60 secondes...</div>
     <button class="contact-btn" onclick="window.open('https://t.me/xto2x', '_blank')">Contacter le support via Telegram</button>
+    <div class="qr-code">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://t.me/xto2x" alt="QR Telegram">
+    </div>
   </div>
 </body>
 </html>
