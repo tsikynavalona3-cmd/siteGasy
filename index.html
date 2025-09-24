@@ -2,154 +2,100 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>X vers X² 24h</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#203a43">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site EN MAINTENANCE</title>
   <style>
-    html, body {
-      height: 100%;
-      width: 100%;
+    body {
+      background-color: #1e1e1e;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
-      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
       overflow: hidden;
-      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-
-    /* Etoile background text */
-    .floating-title {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2.5em;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 0.08);
-      letter-spacing: 2px;
-      animation: sparkle 12s linear infinite;
-      pointer-events: none;
-      z-index: 0;
+    .container {
+      width: 90%;
+      max-width: 800px;
+      padding: 20px;
+      border: 2px dashed #ff9800;
+      border-radius: 10px;
+      background-color: #2c2c2c;
+      animation: slideInOut 3s ease-in-out infinite;
     }
-
-    @keyframes sparkle {
-      0% { transform: translateX(-50%) scale(1); opacity: 0.08; }
-      50% { transform: translateX(-50%) scale(1.05); opacity: 0.15; }
-      100% { transform: translateX(-50%) scale(1); opacity: 0.08; }
+    @keyframes slideInOut {
+      0% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      100% { transform: translateX(-10px); }
     }
-
-    /* Hafatra afovoany misy effet “afo” */
-    .maintenance-message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      padding: 60px 40px;
-      border-radius: 20px;
-      border: 2px solid #ff6600;
-      box-shadow: 0 0 60px #ff6600, 0 0 120px #ff3300;
-      text-align: center;
-      animation: flameRise 3s ease-in-out infinite alternate;
-      max-width: 90vw;
-      z-index: 1;
-    }
-
-    .maintenance-message h1 {
-      font-size: 2.6em;
-      font-weight: 900;
-      background: linear-gradient(to right, #ffcc00, #ff6600);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 25px;
+    h1 {
+      font-size: 8vw;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 4px #000;
+      margin: 0;
+      color: #ff9800;
+      position: relative;
+      animation: flame 1s infinite alternate;
     }
-
-    .maintenance-message p {
-      font-size: 1.3em;
-      color: #ffffff;
-      font-weight: 600;
-      line-height: 1.8;
-      text-shadow: 1px 1px 2px #000;
+    @keyframes flame {
+      0% { text-shadow: 0 0 10px #ff5722, 0 0 20px #ff9800; }
+      100% { text-shadow: 0 0 20px #ff5722, 0 0 30px #ff9800; }
     }
-
-    @keyframes flameRise {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.95;
-        box-shadow: 0 0 40px #ff6600, 0 0 80px #ff3300;
-        filter: brightness(1.2);
-      }
-      50% {
-        transform: translate(-50%, -48%) scale(1.02);
-        opacity: 1;
-        box-shadow: 0 0 60px #ff9900, 0 0 100px #ff6600;
-        filter: brightness(1.4);
-      }
-      100% {
-        transform: translate(-50%, -52%) scale(0.98);
-        opacity: 0.85;
-        box-shadow: 0 0 30px #ff3300, 0 0 60px #ff0000;
-        filter: brightness(1);
-      }
+    p, .alert, .countdown {
+      font-size: 4vw;
+      margin-top: 20px;
+      animation: fadeInOut 2s ease-in-out infinite;
     }
-
-    @media screen and (max-width: 600px) {
-      .maintenance-message {
-        padding: 30px 20px;
-      }
-      .maintenance-message h1 {
-        font-size: 1.8em;
-      }
-      .maintenance-message p {
-        font-size: 1.05em;
-      }
-      .floating-title {
-        font-size: 1.8em;
-      }
+    .alert {
+      font-weight: bold;
+      color: #ff4c4c;
+    }
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .contact-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1.2em;
+      background-color: #ff9800;
+      color: #1e1e1e;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .contact-btn:hover {
+      background-color: #ffa726;
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 10vw; }
+      p, .alert, .countdown { font-size: 5vw; }
     }
   </style>
+  <script>
+    let seconds = 15;
+    function updateCountdown() {
+      const countdown = document.getElementById("countdown");
+      countdown.textContent = "Redirection dans " + seconds + " secondes...";
+      if (seconds === 0) {
+        window.location.href = "https://tonsite.com"; // ovaina amin'ny URL tena izy
+      }
+      seconds--;
+    }
+    setInterval(updateCountdown, 1000);
+  </script>
 </head>
-<body>
-
-  <!-- Soratra manjavona miparitaka toy ny etoile -->
-  <div class="floating-title">X vers X² 24h</div>
-
-  <!-- Hafatra afovoany style modern + effet “afo” -->
-  <div class="maintenance-message">
-    <h1>SITE EN MAINTENANCE</h1>
-    <p>
-      Le service de dépôt via Faucetpay est actuellement indisponible.<br><br>
-      Ce dysfonctionnement provient directement de Faucetpay et affecte tous les dépôts sur notre plateforme.<br><br>
-      Le site ne sera jamais une arnaque – nous travaillons activement à la réparation 🔧🔥<br>
-      Merci pour votre patience et votre confiance 🙏
-    </p>
-  </div>
-
-</body>
-</html>  </style>
-</head>
-<body>
-  <div class="maintenance-annonce">
-    <div class="maintenance-title">
-      🚧 Maintenance en cours 🚧
-    </div>
-    <div class="maintenance-message">
-      Nous rencontrons actuellement un problème sur la fonctionnalité de dépôt.<br>
-      Le service est temporairement interrompu afin d'effectuer une maintenance.<br><br>
-      <b>Nous présentons nos excuses pour la gêne occasionnée et remercions de votre patience.</b><br>
-      Pour ceux ayant rencontré des problèmes lors du dépôt, nous vous prions de nous excuser par avance.
-    </div>
-    <div class="maintenance-footer">
-      Merci de votre compréhension.<br>
-      L’équipe X vers X²
-    </div>
+<body onload="updateCountdown()">
+  <div class="container">
+    <h1>⛔ SITE EN MAINTENANCE</h1>
+    <p>Nous sommes actuellement en cours de mise à jour.<br>Veuillez revenir dans quelques instants.</p>
+    <div class="alert">⚠️ Le dépôt rencontre encore des problèmes techniques.</div>
+    <div class="countdown" id="countdown">Redirection dans 15 secondes...</div>
+    <button class="contact-btn" onclick="window.open('https://t.me/xto2x', '_blank')">Contacter le support via Telegram</button>
   </div>
 </body>
 </html>
