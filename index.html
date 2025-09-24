@@ -8,420 +8,64 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <style>
-    html, body {
-      height: 100%;
-      min-height: 100%;
-      width: 100vw;
-      min-width: 100vw;
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-      color: #fff;
-      width: 100vw;
-      min-width: 100vw;
-      min-height: 100vh;
-      height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-    header {
-      text-align: center;
-      padding: 40px 5vw 10px 5vw;
-      perspective: 1000px;
-      width: 100vw;
-      min-width: 100vw;
-      background: transparent;
-    }
-    .title-3d {
-      font-size: 2.2em;
-      font-weight: bold;
-      color: #00ffcc;
-      text-shadow: 2px 2px 0 #000, 4px 4px 0 #00ffcc;
-      transform: rotateX(15deg) rotateY(15deg);
-      animation: float 3s ease-in-out infinite;
-      letter-spacing: 2px;
-      word-break: break-word;
-    }
-    @keyframes float {
-      0%, 100% { transform: rotateX(15deg) rotateY(15deg) translateY(0); }
-      50% { transform: rotateX(15deg) rotateY(15deg) translateY(-10px); }
-    }
-    .box {
-      max-width: 520px;
-      min-width: 0;
-      width: 99vw;
-      margin: 0 auto 20px auto;
-      background: rgba(255,255,255,0.10);
-      padding: 38px 6vw 38px 6vw;
-      border-radius: 22px;
-      box-shadow: 0 0 24px #00ffcc;
-      backdrop-filter: blur(8px);
-      text-align: center;
-      position: relative;
-      /* Make login box higher for more visual comfort */
-    }
-    #loginBox {
-      max-width: 430px;
-      min-height: 340px;
-      padding-top: 55px;
-      padding-bottom: 45px;
-      margin-top: 40px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 32px #00ffcc, 0 10px 30px #2c536455;
-      border-radius: 26px;
-      transition: max-width 0.3s, padding 0.3s;
-    }
-    .retour-btn {
-      display: inline-block;
-      background: #00ffcc;
-      color: #203a43;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 18px;
-      font-weight: bold;
-      font-size: 1em;
-      margin: 8px 0 15px 0;
-      box-shadow: 0 0 10px #00ffcc;
-      cursor: pointer;
-      transition: background 0.2s;
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      z-index: 5;
-    }
-    .retour-btn:hover {
-      background: #2c5364;
-      color: #00ffcc;
-    }
-    .label-gras {
-      font-weight: bold;
-      font-size: 1.09em;
-      color: #fff;
-      letter-spacing: 0.5px;
-    }
-    .input-amount {
-      width: 97%;
-      padding: 13px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.4em;
-      background: rgba(255,255,255,0.13);
-      color: #fff;
-      font-weight: 900;
-      text-align: center;
-      box-shadow: 0 0 8px #00ffcc44;
-      letter-spacing: 1px;
-      transition: box-shadow 0.2s;
-    }
-    .input-amount:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px #00ffcc;
-    }
-    ::placeholder {
-      color: #aaa;
-      opacity: 0.7;
-      font-weight: 400;
-      font-size: 1em;
-      letter-spacing: 0px;
-    }
-    button:not(.retour-btn) {
-      width: 97%;
-      padding: 13px;
-      background-color: #00ffcc;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 1.09em;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ffcc;
-      margin-bottom: 10px;
-      color: #203a43;
-    }
-    .section {
-      margin-top: 20px;
-      text-align: left;
-      width: 100%;
-      min-width: 0;
-    }
-    .section h3 {
-      color: #00ffcc;
-      margin-bottom: 10px;
-      text-align: left;
-      font-size: 1.18em;
-      font-weight: bold;
-    }
-    .section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .section li {
-      background: rgba(0,0,0,0.25);
-      margin: 5px 0;
-      padding: 12px 0 12px 0;
-      border-radius: 8px;
-      font-size: 1em;
-    }
-    .ref-link {
-      background: rgba(0,0,0,0.3);
-      padding: 10px;
-      border-radius: 8px;
-      margin-top: 10px;
-      word-break: break-word;
-      font-size: 0.97em;
-    }
-    .qr-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      justify-content: left;
-      width: 100%;
-    }
-    .qr-row img {
-      width: 48px;
-      height: 48px;
-      border-radius: 6px;
-      background: #fff;
-      padding: 2px;
-      border: 1px solid #00ffcc;
-    }
-    .depot-adresses {
-      margin-top: 18px;
-      margin-bottom: 10px;
-      animation: fadein 0.6s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      min-width: 0;
-    }
-    .depot-cadre {
-      background: rgba(0,255,204,0.14);
-      border: 2px solid #00ffcc;
-      border-radius: 15px;
-      padding: 22px 6vw;
-      margin-top: 8px;
-      margin-bottom: 8px;
-      min-width: 0;
-      box-shadow: 0 0 10px #00ffcc33;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      font-size: 1.07em;
-      justify-content: center;
-    }
-    .depot-cadre strong {
-      color: #00ffcc;
-      font-size: 1.18em;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-      font-weight: bold;
-      text-align: center;
-      width: 100%;
-    }
-    .depot-details {
-      background: transparent;
-      width: 100%;
-      margin-top: 9px;
-      margin-bottom: 5px;
-      font-size: 1.07em;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-    }
-    .depot-details-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-      background: rgba(0,0,0,0.09);
-      border-radius: 8px;
-      overflow: hidden;
-      text-align: center;
-    }
-    .depot-details-table th, .depot-details-table td {
-      padding: 7px 4px;
-      text-align: center;
-      font-size: 1.07em;
-      border-bottom: 1px solid #00ffcc44;
-    }
-    .depot-details-table th {
-      background: #00ffcc18;
-      color: #00ffcc;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-    }
-    .depot-details-table td {
-      color: #fff;
-      font-weight: bold;
-    }
-    .white-num {
-      color: #fff !important;
-      font-weight: 900;
-      letter-spacing: 1px;
-      font-size: 1.12em;
-    }
-    .crypto-choice {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin-bottom: 10px;
-    }
-    .crypto-choice label {
-      font-weight: bold;
-      color: #00ffcc;
-      cursor: pointer;
-      font-size: 1.09em;
-    }
-    .montant-converti {
-      margin: 10px 0;
-      font-size: 1.07em;
-      color: #fff;
-      font-weight: bold;
-    }
-    .transaction-gain {
-      margin-top: 12px;
-      background: rgba(0,0,0,0.13);
-      border-radius: 10px;
-      padding: 10px 0;
-      font-size: 1.12em;
-      color: #00ffcc;
-      font-weight: bold;
-    }
-    .transaction-status {
-      margin-top: 12px;
-      border-radius: 8px;
-      padding: 9px 0;
-      font-size: 1em;
-      font-weight: bold;
-      width: 100%;
-      transition: background 0.3s, color 0.3s;
-    }
-    .status-attente {
-      background: #ffc107;
-      color: #333;
-      border: 1.5px solid #e9a700;
-    }
-    .status-valide {
-      background: #22e222;
-      color: #fff;
-      border: 1.5px solid #13b613;
-    }
-    .confirmation-texte {
-      margin-top: 10px;
-      color: #fff;
-      font-style: italic;
-      font-size: 1em;
-      background: rgba(0,0,0,0.10);
-      border-radius: 8px;
-      padding: 8px;
-    }
-    .transaction-tableau {
-      margin-top: 14px;
-      width: 100%;
-      border-collapse: collapse;
-      background: rgba(0,0,0,0.10);
-      border-radius: 12px;
-      overflow: hidden;
-      font-size: 0.97em;
-      min-width: 0;
-    }
-    .transaction-tableau th {
-      background: #00ffcc;
-      color: #203a43;
-      padding: 7px 3px;
-      font-weight: bold;
-      border-bottom: 1.5px solid #00ffcc;
-    }
-    .transaction-tableau td {
-      padding: 7px 3px;
-      border-bottom: 1px solid #0f2027;
-    }
-    .gain-doubled {
-      color: #22e222;
-      font-weight: bold;
-      background: rgba(34,226,34,0.07);
-      border-radius: 7px;
-      padding: 4px 0;
-      font-size: 0.98em;
-      margin-top: 2px;
-    }
-    .message-jaune {
-      background: #fff6d1;
-      color: #a87b00;
-      border: 2px solid #ffe58f;
-      border-radius: 9px;
-      padding: 11px 14px 11px 14px;
-      margin: 16px auto 6px auto;
-      font-size: 1em;
-      font-weight: bold;
-      max-width: 350px;
-      position: relative;
-      box-shadow: 0 0 10px #ffe58f55;
-      text-align: left;
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 100;
-      animation: shake 1s cubic-bezier(.36,.07,.19,.97) 2;
-    }
-    @keyframes shake {
-      10%, 90% { transform: translateX(-2px); }
-      20%, 80% { transform: translateX(4px); }
-      30%, 50%, 70% { transform: translateX(-6px); }
-      40%, 60% { transform: translateX(6px); }
-      100% { transform: translateX(0);}
-    }
-    .close-message {
-      background: none;
-      border: none;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #a87b00;
-      cursor: pointer;
-      margin-left: 18px;
-      margin-right: -7px;
-    }
-    .disabled-btn {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    @keyframes fadein {
-      0% { opacity: 0;}
-      100% { opacity: 1;}
-    }
+    /* --- Style rehetra mitovy amin'ny version teo aloha --- */
+    html, body { height: 100%; min-height: 100%; width: 100vw; min-width: 100vw; box-sizing: border-box; }
+    body { margin: 0; padding: 0; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); font-family: 'Segoe UI', Arial, Helvetica, sans-serif; color: #fff; width: 100vw; min-width: 100vw; min-height: 100vh; height: 100vh; overflow-x: hidden; position: relative; }
+    header { text-align: center; padding: 40px 5vw 10px 5vw; perspective: 1000px; width: 100vw; min-width: 100vw; background: transparent; }
+    .title-3d { font-size: 2.2em; font-weight: bold; color: #00ffcc; text-shadow: 2px 2px 0 #000, 4px 4px 0 #00ffcc; transform: rotateX(15deg) rotateY(15deg); animation: float 3s ease-in-out infinite; letter-spacing: 2px; word-break: break-word; }
+    @keyframes float { 0%, 100% { transform: rotateX(15deg) rotateY(15deg) translateY(0); } 50% { transform: rotateX(15deg) rotateY(15deg) translateY(-10px); } }
+    .box { max-width: 520px; min-width: 0; width: 99vw; margin: 0 auto 20px auto; background: rgba(255,255,255,0.10); padding: 38px 6vw 38px 6vw; border-radius: 22px; box-shadow: 0 0 24px #00ffcc; backdrop-filter: blur(8px); text-align: center; position: relative; }
+    #loginBox { max-width: 430px; min-height: 340px; padding-top: 55px; padding-bottom: 45px; margin-top: 40px; margin-bottom: 30px; box-shadow: 0 0 32px #00ffcc, 0 10px 30px #2c536455; border-radius: 26px; transition: max-width 0.3s, padding 0.3s; }
+    .retour-btn { display: inline-block; background: #00ffcc; color: #203a43; border: none; border-radius: 8px; padding: 10px 18px; font-weight: bold; font-size: 1em; margin: 8px 0 15px 0; box-shadow: 0 0 10px #00ffcc; cursor: pointer; transition: background 0.2s; position: absolute; left: 10px; top: 10px; z-index: 5; }
+    .retour-btn:hover { background: #2c5364; color: #00ffcc; }
+    .label-gras { font-weight: bold; font-size: 1.09em; color: #fff; letter-spacing: 0.5px; }
+    .input-amount { width: 97%; padding: 13px; margin: 10px 0; border: none; border-radius: 8px; font-size: 1.4em; background: rgba(255,255,255,0.13); color: #fff; font-weight: 900; text-align: center; box-shadow: 0 0 8px #00ffcc44; letter-spacing: 1px; transition: box-shadow 0.2s; }
+    .input-amount:focus { outline: none; box-shadow: 0 0 0 2px #00ffcc; }
+    ::placeholder { color: #aaa; opacity: 0.7; font-weight: 400; font-size: 1em; letter-spacing: 0px; }
+    button:not(.retour-btn) { width: 97%; padding: 13px; background-color: #00ffcc; border: none; border-radius: 8px; font-weight: bold; font-size: 1.09em; cursor: pointer; box-shadow: 0 0 10px #00ffcc; margin-bottom: 10px; color: #203a43; }
+    .section { margin-top: 20px; text-align: left; width: 100%; min-width: 0; }
+    .section h3 { color: #00ffcc; margin-bottom: 10px; text-align: left; font-size: 1.18em; font-weight: bold; }
+    .section ul { list-style: none; padding: 0; margin: 0; }
+    .section li { background: rgba(0,0,0,0.25); margin: 5px 0; padding: 12px 0 12px 0; border-radius: 8px; font-size: 1em; }
+    .ref-link { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; margin-top: 10px; word-break: break-word; font-size: 0.97em; }
+    .qr-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; justify-content: left; width: 100%; }
+    .qr-row img { width: 48px; height: 48px; border-radius: 6px; background: #fff; padding: 2px; border: 1px solid #00ffcc; }
+    .depot-adresses { margin-top: 18px; margin-bottom: 10px; animation: fadein 0.6s; display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
+    .depot-cadre { background: rgba(0,255,204,0.14); border: 2px solid #00ffcc; border-radius: 15px; padding: 22px 6vw; margin-top: 8px; margin-bottom: 8px; min-width: 0; box-shadow: 0 0 10px #00ffcc33; text-align: center; display: flex; flex-direction: column; align-items: center; width: 100%; font-size: 1.07em; justify-content: center; }
+    .depot-cadre strong { color: #00ffcc; font-size: 1.18em; margin-bottom: 10px; letter-spacing: 1px; font-weight: bold; text-align: center; width: 100%; }
+    .depot-details { background: transparent; width: 100%; margin-top: 9px; margin-bottom: 5px; font-size: 1.07em; color: #fff; display: flex; justify-content: center; }
+    .depot-details-table { width: 100%; border-collapse: collapse; margin-top: 8px; background: rgba(0,0,0,0.09); border-radius: 8px; overflow: hidden; text-align: center; }
+    .depot-details-table th, .depot-details-table td { padding: 7px 4px; text-align: center; font-size: 1.07em; border-bottom: 1px solid #00ffcc44; }
+    .depot-details-table th { background: #00ffcc18; color: #00ffcc; font-weight: bold; letter-spacing: 0.5px; }
+    .depot-details-table td { color: #fff; font-weight: bold; }
+    .white-num { color: #fff !important; font-weight: 900; letter-spacing: 1px; font-size: 1.12em; }
+    .crypto-choice { display: flex; justify-content: center; gap: 25px; margin-bottom: 10px; }
+    .crypto-choice label { font-weight: bold; color: #00ffcc; cursor: pointer; font-size: 1.09em; }
+    .montant-converti { margin: 10px 0; font-size: 1.07em; color: #fff; font-weight: bold; }
+    .transaction-gain { margin-top: 12px; background: rgba(0,0,0,0.13); border-radius: 10px; padding: 10px 0; font-size: 1.12em; color: #00ffcc; font-weight: bold; }
+    .transaction-status { margin-top: 12px; border-radius: 8px; padding: 9px 0; font-size: 1em; font-weight: bold; width: 100%; transition: background 0.3s, color 0.3s; }
+    .status-attente { background: #ffc107; color: #333; border: 1.5px solid #e9a700; }
+    .status-valide { background: #22e222; color: #fff; border: 1.5px solid #13b613; }
+    .transaction-tableau { margin-top: 14px; width: 100%; border-collapse: collapse; background: rgba(0,0,0,0.10); border-radius: 12px; overflow: hidden; font-size: 0.97em; min-width: 0; }
+    .transaction-tableau th { background: #00ffcc; color: #203a43; padding: 7px 3px; font-weight: bold; border-bottom: 1.5px solid #00ffcc; }
+    .transaction-tableau td { padding: 7px 3px; border-bottom: 1px solid #0f2027; }
+    .gain-doubled { color: #22e222; font-weight: bold; background: rgba(34,226,34,0.07); border-radius: 7px; padding: 4px 0; font-size: 0.98em; margin-top: 2px; }
+    .message-jaune { background: #fff6d1; color: #a87b00; border: 2px solid #ffe58f; border-radius: 9px; padding: 11px 14px 11px 14px; margin: 16px auto 6px auto; font-size: 1em; font-weight: bold; max-width: 350px; position: relative; box-shadow: 0 0 10px #ffe58f55; text-align: left; display: none; align-items: center; justify-content: space-between; z-index: 100; animation: shake 1s cubic-bezier(.36,.07,.19,.97) 2; }
+    @keyframes shake { 10%, 90% { transform: translateX(-2px); } 20%, 80% { transform: translateX(4px); } 30%, 50%, 70% { transform: translateX(-6px); } 40%, 60% { transform: translateX(6px); } 100% { transform: translateX(0);} }
+    .close-message { background: none; border: none; font-size: 1.2em; font-weight: bold; color: #a87b00; cursor: pointer; margin-left: 18px; margin-right: -7px; }
+    .disabled-btn { opacity: 0.6; cursor: not-allowed; }
+    @keyframes fadein { 0% { opacity: 0;} 100% { opacity: 1;} }
     @media screen and (max-width: 600px) {
-      .box {
-        max-width: 99vw;
-        margin: 0 0 15px 0;
-        padding: 8vw 2vw 20vw 2vw;
-      }
-      #loginBox {
-        max-width: 99vw;
-        margin-top: 10vw;
-        margin-bottom: 10vw;
-        padding: 15vw 2vw 15vw 2vw;
-      }
-      .depot-cadre {
-        padding: 18px 1vw;
-      }
-      .depot-details-table th, .depot-details-table td {
-        padding: 6px 2px;
-        font-size: 0.98em;
-      }
+      .box { max-width: 99vw; margin: 0 0 15px 0; padding: 8vw 2vw 20vw 2vw; }
+      #loginBox { max-width: 99vw; margin-top: 10vw; margin-bottom: 10vw; padding: 15vw 2vw 15vw 2vw; }
+      .depot-cadre { padding: 18px 1vw; }
+      .depot-details-table th, .depot-details-table td { padding: 6px 2px; font-size: 0.98em; }
       .section h3 { font-size: 1.09em; }
       .crypto-choice label { font-size: 1em;}
       button:not(.retour-btn) { font-size: 1em; }
       input[type="text"], input[type="number"] { font-size: 1em;}
     }
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 400px) margin-bottom { transform
       .box { padding: 5px 0 13vw 0; }
       #loginBox { padding: 10vw 1vw 12vw 1vw;}
       .depot-cadre { padding: 8px 1vw;}
@@ -462,7 +106,7 @@
         <input type="number" id="depositInput" class="input-amount" placeholder="Entrez le montant">
         <button onclick="doDeposit()">Valider</button>
         <p id="depositError" style="color: red;"></p>
-        <div id="montantConverti" class="montant-converti" style="display:none;"></div>
+        <div id="montantConverti" class="montant-converti" style="display:notext-shadow
         <div id="depotAdresses" class="depot-adresses" style="display:none;">
           <!-- Cadre complet détails dépot -->
           <div id="depotCadreTrx" class="depot-cadre" style="display:none;">
@@ -567,6 +211,27 @@
 </div>
 
 <script>
+  // Storage helpers
+  function getStorageKey(address) {
+    return "transactions_" + address;
+  }
+  function loadTransactionsForAddress(address) {
+    const key = getStorageKey(address);
+    const data = localStorage.getItem(key);
+    if (data) {
+      try {
+        let arr = JSON.parse(data);
+        if (Array.isArray(arr)) return arr;
+      } catch (e) {}
+    }
+    return [];
+  }
+  function saveTransactionsForAddress(address, txs) {
+    // Only save "Validé" transactions
+    const validTxs = txs.filter(tx => tx.status === "Validé");
+    localStorage.setItem(getStorageKey(address), JSON.stringify(validTxs));
+  }
+
   let currentAddress = '';
   let depositTotal = 0;
   let lastPage = "loginBox";
@@ -597,11 +262,10 @@
     if (ltcRegex.test(address) || trxRegex.test(address)) {
       error.textContent = '';
       showPage('dashboard');
-      // *** Correction ici pour le lien de parrainage ***
       refLink.textContent = 'https://xto2x.netlify.app/?ref=' + address;
       currentAddress = address;
       localStorage.setItem("savedAddress", address);
-      autoRetraitIfDue();
+      transactions = loadTransactionsForAddress(address); // Load historique validé
       renderTransactions();
     } else {
       error.textContent = 'Adresse invalide. Seules les adresses TRX ou LTC sont acceptées.';
@@ -678,7 +342,6 @@
 
     if (isValid) {
       depositError.textContent = '';
-      depositTotal += (type === "TRX" ? montantTrx : montantLtc * coursLtcToTrx);
       montantConverti.style.display = "block";
       montantConverti.innerHTML =
         `Montant converti : <span class="white-num">${montantTrx.toFixed(3)} TRX</span> &nbsp;|&nbsp; <span class="white-num">${montantLtc.toFixed(3)} LTC</span>`;
@@ -722,7 +385,7 @@
         btnValiderTransaction.classList.remove('disabled-btn');
       }, 120000);
 
-      // Ajout du gain doublé après 24h au tableau
+      // Ajout provisoire (tsy mbola validé, tsy voatahiry)
       transactions.push({
         date: dateStr,
         type: "Dépot",
@@ -767,10 +430,16 @@
     } else {
       document.getElementById('detailStatutLtc').textContent = "Validé";
     }
-    if (transactions.length > 0) {
-      transactions[transactions.length-1].status = "Validé";
-      renderTransactions();
+    // Mitady ilay transaction farany "En attente" dia manova azy ho "Validé"
+    for (let i = transactions.length - 1; i >= 0; i--) {
+      if (transactions[i].status === "En attente") {
+        transactions[i].status = "Validé";
+        break;
+      }
     }
+    // Tohizo amin'ny fitahirizana ireo rehetra "Validé" ihany
+    saveTransactionsForAddress(currentAddress, transactions);
+    renderTransactions();
     if (validerTimeout) clearTimeout(validerTimeout);
   }
 
@@ -780,6 +449,7 @@
   }
 
   function renderTransactions() {
+    // Raha miverina miditra, dia validé ihany no hita. Raha session, dia misy "En attente" ananany koa.
     const tbody = document.querySelector("#transactionTableau tbody");
     tbody.innerHTML = "";
     transactions.forEach(function(tx) {
@@ -797,31 +467,6 @@
     });
   }
 
-  function doWithdraw() {
-    let now = new Date();
-    let dateStr = now.toLocaleDateString() + " " + now.toLocaleTimeString().slice(0,5);
-    transactions.push({
-      date: dateStr,
-      type: "Retrait",
-      montant: "-",
-      gain: "-",
-      status: "Validé"
-    });
-    renderTransactions();
-    depositTotal = 0;
-  }
-
-  function autoRetraitIfDue() {
-    const lastRetrait = localStorage.getItem("lastRetrait");
-    const now = Date.now();
-    const oneDay = 24 * 60 * 60 * 1000;
-    if (!lastRetrait || now - parseInt(lastRetrait) >= oneDay) {
-      doWithdraw();
-      localStorage.setItem("lastRetrait", now.toString());
-    }
-  }
-
-  showPage('loginBox');
 </script>
 
 </body>
