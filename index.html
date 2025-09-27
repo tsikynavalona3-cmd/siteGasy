@@ -3,48 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erreur 404 - Page introuvable</title>
+  <title>BNB Doublé  À Bientôt</title>
   <style>
     body {
-      background-color: #0f0f0f;
-      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #0a1f2e, #001018);
+      color: #e0f7fa;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
       text-align: center;
     }
+
     h1 {
-      font-size: 120px;
-      margin: 0;
-      color: #ff4c4c;
+      font-size: 58px;
+      color: #00e5ff;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
+
+    h2 {
+      font-size: 36px;
+      color: #69f0ae;
+      margin-bottom: 15px;
+    }
+
     p {
       font-size: 22px;
-      margin: 20px 0;
+      max-width: 700px;
+      margin: 0 20px;
+      line-height: 1.6;
     }
-    a {
-      color: #00c3ff;
-      text-decoration: none;
+
+    .highlight {
       font-weight: bold;
-      border: 2px solid #00c3ff;
-      padding: 12px 24px;
-      border-radius: 6px;
-      transition: 0.3s;
+      color: #ff8a65;
     }
-    a:hover {
-      background-color: #00c3ff;
-      color: #000;
+
+    /* Flash info miverimberina */
+    .flash-info {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #004d40;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 12px 0;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .flash-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 60s linear infinite; /* Vitesse mora, fandeha malefaka */
+      padding-left: 100%;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Erreur 404</h1>
-  <p>Désolé, la page que vous recherchez est introuvable.</p>
-  <!-- Remplace ce lien par le vrai lien de ton page d’accueil -->
-  <a href="index.html" target="_self">Retour à l’accueil</a>
+  <h1>À bientôt  BNB doublé</h1>
+  <h2>Coming soon  BNB will be doubled</h2>
+  <p>
+    Le service <span class="highlight">BNB</span> reste actif.<br>
+    Préparez-vous à une nouvelle version où <span class="highlight">BNB sera doublé</span> très prochainement.<br><br>
+    The <span class="highlight">BNB</span> service is still active.<br>
+    Get ready for a new version where <span class="highlight">BNB will be doubled</span> very soon.
+  </p>
+
+  <!-- Flash info miverimberina -->
+  <div class="flash-info">
+    <div class="flash-text">
+       Annonce immédiate : Les services TRX et LTC sont officiellement terminés. Seul BNB reste actif jusqu’à nouvel ordre. 
+    </div>
+  </div>
 </body>
 </html>
