@@ -63,7 +63,7 @@
     @keyframes pulse {
       0% { transform: scale(1);}
       50% {transform: scale(1.05);}
-      100% { transform: scale(1);}
+      100% {transform: scale(1);}
     }
     input, select {
       width: 100%;
@@ -339,6 +339,56 @@
         font-size: clamp(0.93em,2vw,0.98em);
       }
     }
+    /* Ampiana style referral */
+    .referral-label {
+      font-weight: bold;
+      color: #ffcc00;
+      font-size: clamp(1em,2vw,1.07em);
+    }
+    .referral-link {
+      display: inline-block;
+      background: #0d47a1;
+      color: #fff;
+      border-radius: 14px;
+      padding: clamp(12px,2vw,18px) clamp(7px,2vw,24px);
+      margin-top: 10px;
+      font-size: clamp(1em,2.5vw,1.17em);
+      font-weight: bold;
+      letter-spacing: 1px;
+      word-break: break-all;
+      white-space: pre-line;
+      text-align: center;
+      border: 2.5px solid #42a5f5;
+      box-shadow: 0 2px 20px #1565c0cc, 0 0 20px #42a5f540;
+      animation: addr-vibrate 1s linear infinite;
+      user-select: all;
+      max-width: 100%;
+      width: auto;
+    }
+    .copy-btn {
+      background: #ffcc00;
+      color: #222;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      padding: 9px 24px;
+      margin-top: 7px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      font-size: clamp(1em,2vw,1.1em);
+      transition: background 0.2s, color 0.2s;
+    }
+    .copy-btn:hover {
+      background: #ff0066;
+      color: #fff;
+    }
+    .copied-msg {
+      color: #00e676;
+      font-weight: bold;
+      font-size: clamp(0.97em,2vw,1em);
+      margin-top: 3px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -413,13 +463,16 @@
         status_wait: "Waiting for transfer",
         status_valid: "Validated",
         status_returned: "Returned x2",
-        // NOTE: changed below: span referralLink is now empty, we fill with full link via JS
         affiliationContent: `
           <div class="dashboard-header">Affiliation</div>
-          <div>
+          <div style="margin-top: 16px; margin-bottom: 16px; font-size: clamp(1em,2vw,1.08em); color: #fff;">
             Invite friends and earn doubled rewards!<br>
-            <b>Your referral link:</b><br>
-            <span id="referralLink" style="word-break:break-all;"></span>
+          </div>
+          <div>
+            <span class="referral-label">Your referral link:</span>
+            <div class="referral-link" id="refLink"></div>
+            <button class="copy-btn" id="copyBtn">Copy</button>
+            <div class="copied-msg" id="copiedMsg">Copied!</div>
           </div>
         `,
         aboutContent: `
@@ -463,13 +516,16 @@
         status_wait: "En attente de transfert",
         status_valid: "Validé",
         status_returned: "Rendu x2",
-        // NOTE: changed below: span referralLink is now empty, we fill with full link via JS
         affiliationContent: `
           <div class="dashboard-header">Affiliation</div>
-          <div>
+          <div style="margin-top: 16px; margin-bottom: 16px; font-size: clamp(1em,2vw,1.08em); color: #fff;">
             Invitez vos amis et gagnez des récompenses doublées !<br>
-            <b>Votre lien de parrainage :</b><br>
-            <span id="referralLink" style="word-break:break-all;"></span>
+          </div>
+          <div>
+            <span class="referral-label">Votre lien de parrainage :</span>
+            <div class="referral-link" id="refLink"></div>
+            <button class="copy-btn" id="copyBtn">Copier</button>
+            <div class="copied-msg" id="copiedMsg">Copié !</div>
           </div>
         `,
         aboutContent: `
@@ -597,14 +653,25 @@
       else if (tab === "affiliation") html = texts[currentLang].affiliationContent;
       else if (tab === "about") html = texts[currentLang].aboutContent;
       dashboardContent.innerHTML = html;
-      // Insert referral info (prefix lien araka ny fangatahanao)
-      if (dashboardContent.querySelector('#referralLink')) {
-        dashboardContent.querySelector('#referralLink').textContent =
-          "https://d-trx-24h-doubleur-crypto.netlify.app/?ref=" + currentWallet;
+      // Insert referral info & copy for Affiliation
+      if (tab === "affiliation" && dashboardContent.querySelector('#refLink')) {
+        // Referral link: https://d-trx-24h-doubleur-crypto-instantly.netlify.app?ref=ADDR
+        let wallet = currentWallet || localStorage.getItem("dtrx_wallet") || "TGUUdvn3QYJG4EY9dVLaCyNGZsX29Jwqvg";
+        let ref = "?ref=" + wallet;
+        dashboardContent.querySelector("#refLink").textContent = "https://d-trx-24h-doubleur-crypto-instantly.netlify.app" + ref;
+        let copyBtn = dashboardContent.querySelector("#copyBtn");
+        let copiedMsg = dashboardContent.querySelector("#copiedMsg");
+        copyBtn.onclick = function() {
+          const txt = dashboardContent.querySelector("#refLink").textContent;
+          navigator.clipboard.writeText(txt).then(function() {
+            copiedMsg.style.display = "block";
+            setTimeout(()=>{copiedMsg.style.display = "none";}, 2000);
+          });
+        };
       }
     }
 
-    // Deposit Section: stepper logic
+    // Deposit Section: stepper logic (tsy ovaina)
     function renderDepositSection() {
       let section = dashboardContent.querySelector('#depositSection');
       if (!section) return;
